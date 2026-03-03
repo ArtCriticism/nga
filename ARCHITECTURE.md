@@ -12,7 +12,7 @@ TMSPublicExtract (SQL Server)
         |
         v
 extract_opendata.py
-    - Connects via ODBC (Trusted_Connection / Kerberos)
+    - Connects via ODBC
     - Queries 17 x_ tables directly
     - Formats output to match legacy CSV conventions
         |
@@ -42,7 +42,7 @@ TMS → PostgreSQL (vm-webdb-tdp) → psql COPY → CSV → GitHub
 - **Direct SQL Server access**: Removes the PostgreSQL dependency and simplifies the data path.
 - **CSV format compatibility**: Output matches the legacy PostgreSQL `COPY CSV` format exactly — same headers, same quoting rules, same NULL representation — so downstream consumers are unaffected.
 - **Timezone handling**: SQL Server datetimes have no timezone. The script treats them as US Eastern and appends the correct UTC offset (`-04` or `-05`) to match the PostgreSQL `timestamptz` output.
-- **Kerberos authentication**: Uses `Trusted_Connection=yes` with Active Directory service accounts. No passwords are stored in the script or repository.
+- **Authentication**: Uses a service account. No passwords are stored in the script or repository.
 
 ### What the Script Does
 
@@ -75,7 +75,7 @@ extract_opendata.py --server HOST --database DB [--git-push] [--output-dir DIR]
 Tests are in `tests/` and require `pytest` (`pip install pytest`).
 
 - **Unit tests** (`test_csv_formatting.py`): CSV formatting, value conversion, header validation. No database needed.
-- **Integration tests** (`test_database.py`): Runs all 17 queries against the database, validates column counts, row counts, data constraints (e.g., openaccess values are only 0 or 1). Requires database access via service account credentials in `/usr/local/nga/etc/tmspublicextract.conf`. Tests auto-skip gracefully if no database is available.
+- **Integration tests** (`test_database.py`): Runs all 17 queries against the database, validates column counts, row counts, data constraints (e.g., openaccess values are only 0 or 1). Requires database access. Tests auto-skip gracefully if no database is available.
 
 Run all tests:
 ```
