@@ -24,10 +24,6 @@ DBSERVER=$1
 DBNAME=$2
 DBUSER=$3
 
-#echo $DBSERVER
-#echo $DBNAME
-#echo $DBUSER
-
 quiet_git pull 
 
 # read the contents of tables.sql into a variable
@@ -51,8 +47,6 @@ do
     sqlcmd="${sql} copy (select * from tt ) to stdout with csv header; drop table tt;"
     
     # run sql and save to CSV file with headers intact
-    #echo ${sqlcmd}
-    #echo "psql -q -t -h ${DBSERVER} ${DBNAME} ${DBUSER}"
     echo "${sqlcmd}" | psql -q -t -h ${DBSERVER} ${DBNAME} ${DBUSER} > ./${table}.csv
 
     # generate definitions for the temporary tables represented by each of the queries so that someone can easily reproduce a working database
