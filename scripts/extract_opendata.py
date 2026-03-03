@@ -44,11 +44,11 @@ ACCESSIONED_CONSTITUENTS = (
 TABLES = [
     (
         "constituents",
-        ["constituentid", "ulanid", "preferreddisplayname", "forwarddisplayname",
+        ["constituentid", "uuid", "ulanid", "preferreddisplayname", "forwarddisplayname",
          "lastname", "displaydate", "artistofngaobject", "beginyear", "endyear",
          "visualbrowsertimespan", "nationality", "visualbrowsernationality",
          "constituenttype", "wikidataid"],
-        f"""SELECT constituentID, ULANID, preferredDisplayName, forwardDisplayName,
+        f"""SELECT constituentID, uuid, ULANID, preferredDisplayName, forwardDisplayName,
                    lastName, displayDate, artistOfNGAObject, beginYear, endYear,
                    visualBrowserTimeSpan, nationality, visualBrowserNationality,
                    constituentType, wikidataID
@@ -104,14 +104,14 @@ TABLES = [
     ),
     (
         "objects",
-        ["objectid", "accessioned", "accessionnum", "locationid", "title",
+        ["objectid", "uuid", "accessioned", "accessionnum", "locationid", "title",
          "displaydate", "beginyear", "endyear", "visualbrowsertimespan", "medium",
          "dimensions", "inscription", "markings", "attributioninverted", "attribution",
          "provenancetext", "creditline", "classification", "subclassification",
          "visualbrowserclassification", "parentid", "isvirtual", "departmentabbr",
          "portfolio", "series", "volume", "watermarks", "lastdetectedmodification",
          "wikidataid", "customprinturl"],
-        """SELECT o.objectID, o.accessioned, o.accessionNum, o.locationID, o.title,
+        """SELECT o.objectID, o.uuid, o.accessioned, o.accessionNum, o.locationID, o.title,
                   o.displayDate, o.beginYear, o.endYear, o.visualBrowserTimeSpan,
                   o.medium, o.dimensions, o.inscription, o.markings,
                   o.attributionInverted, o.attribution, o.provenanceText, o.creditLine,

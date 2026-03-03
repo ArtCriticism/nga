@@ -105,6 +105,7 @@ it is possible for some fields, e.g. biography, to have embedded HTML italics ta
 
 (	
     constituentID               integer NOT NULL PRIMARY KEY,	primary key (tms identifier)
+    uuid                        character varying(64) NULL,	universally unique identifier for this constituent
     ULANID                      character varying(32) NULL,	Getty ULAN ID - partially applied to NGA artists - not all artists are in ULAN and not all matches have been curated yet
     preferredDisplayName        character varying(256) NULL,	inverted full name of the constituent - this is the NGA's preferred name for the constituent
     forwardDisplayName          character varying(256) NULL,	forward direction preferred full name of the constituent
@@ -257,6 +258,7 @@ Underscores appearing in nvarchar columns should be treated as an italicizing ma
 
 (	
     objectID                    integer NOT NULL PRIMARY KEY,	the primary identifier for an art object - identifier is created by the NGA's collection management system (tms); primary key for the table
+    uuid                        character varying(64) NULL,	universally unique identifier for this art object
     accessioned                 integer NOT NULL,	0 | 1 flag indicating whether this object is an NGA accessioned work - for the public collection extract, this should always be 1
     accessionNum                character varying(32) NULL,	accession number assigned to an art object - art objects that are not accessioned works do not begin with a year - otherwise, the vast majority of NGA art object accession numbers are formatted with a numbering system starting with the year, then followed by an accession lot, and finally ordering within that lot, e.g. 1942.2.1 - depending on the complexity of an art object these can be more complicated
     locationID                  integer NULL,	location identifier corresponding to the current location of the primary component of the art object
